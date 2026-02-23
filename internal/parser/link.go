@@ -2,37 +2,40 @@ package parser
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 
+	"github.com/rs/zerolog"
 	"golang.org/x/net/html"
 )
 
-func LinkParser(n *html.Node, url string) {
+func LinkParser(n *html.Node, url string, log zerolog.Logger) ([]string, error) {
+	var links []string
 	if n.Type == html.ElementNode {
-		// baseUrl, err := GetBaseUrl(url)
-		// if err != nil {
-		// 	log.Fatal("Failed to parse url :", err)
-		// }
+		baseUrl, err := GetBaseUrl(url)
+		if err != nil {
+
+			log.Error().Err(err).Str("url", url).Msg("Failed to get base url")
+			return nil, err
+		}
 
 		for _, attr := range n.Attr {
 			if attr.Key == "href" {
-				fmt.Println(attr.Val)
-				// rawUrl := strings.Split(attr.Val, "/")
-				// if j == 99 {
-				// 	break
-				// }
-				// if rawUrl[0] == "http:" || rawUrl[0] == "https:" {
-				// 	fmt.Println(attr.Val)
-				// } else if attr.Val[0] == '/' {
-				// 	fmt.Println(baseUrl + string(attr.Val))
-				// }
+				rawUrl := strings.Split(attr.Val, "/")
+				if rawUrl[0] == "http:" || rawUrl[0] == "https:" {
+					links = append(links, string(attr.Val))
+				} else if attr.Val[0] == '/' {
+					links = append(links, string(baseUrl+string(attr.Val)))
+				}
 			}
 		}
+
 	}
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		LinkParser(c, url)
+		childLinks, _ := LinkParser(c, url, log)
+		links = append(links, childLinks...)
 	}
+
+	return links, nil
 }
 
 func GetBaseUrl(givenUrl string) (string, error) {
