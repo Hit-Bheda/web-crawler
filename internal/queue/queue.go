@@ -7,7 +7,7 @@ import (
 )
 
 func Enqueue(ctx context.Context, rdb *redis.Client, url string) error {
-	return rdb.RPush(ctx, "crawler:queue", url).Err()
+	return rdb.LPush(ctx, "crawler:queue", url).Err()
 }
 
 func Dequeue(ctx context.Context, rdb *redis.Client) (string, error) {
