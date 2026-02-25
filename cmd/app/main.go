@@ -54,7 +54,12 @@ func main() {
 
 		log.Info().Str("url", url).Msg("Sucessfully crawled the page!")
 		for _, link := range urls {
-			queue.Enqueue(ctx, rdb, link)
+			exists, _ := rdb.SIsMember(ctx, "visited", link).Result()
+			if exists == false {
+				rdb.SAdd(ctx, "visited", link)
+				queue.Enqueue(ctx, rdb, link)
+			}
+
 		}
 	}
 }
