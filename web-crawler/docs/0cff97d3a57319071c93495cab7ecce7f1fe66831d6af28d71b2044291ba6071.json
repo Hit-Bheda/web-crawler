@@ -1,0 +1,8 @@
+[
+ {
+  "id": "0cff97d3a57319071c93495cab7ecce7f1fe66831d6af28d71b2044291ba6071",
+  "url": "https://en.wikipedia.org/wiki/User_agent",
+  "title": "User agent - Wikipedia",
+  "content": "User agent - Wikipedia Jump to content From Wikipedia, the free encyclopedia Software acting on behalf of a user Not to be confused with User-Agent header. On the Web, a user agent is a software agent responsible for retrieving and facilitating end-user interaction with Web content.[1] This includes all web browsers, such as Google Chrome and Safari, some email clients, standalone download managers like youtube-dl, and other command-line utilities like cURL.[2] The user agent is the client in a client–server system. The HTTP User-Agent header is intended to clearly identify the agent to the server.[2] However, this header can be omitted or spoofed,[2] so some websites use other detection methods. References[edit] ^ \"W3C Definition of User Agent\". www.w3.org. 2011-06-16. Retrieved 2018-10-20. ^ a b c \"User agent\". MDN Web Docs. 8 July 2024. Retrieved from \"https://en.wikipedia.org/w/index.php?title=User_agent\u0026oldid=1347663243\" Category: Clients (computing)Hidden categories: Articles with short descriptionShort description matches Wikidata Search User agent 20 languages Add topic"
+ }
+]
